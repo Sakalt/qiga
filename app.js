@@ -1,3 +1,8 @@
+const specialWords = {
+    "独立": "りぇとこに",
+    "国": "こに"
+};
+
 function transformWord(word) {
     // 特別単語リストをチェック
     if (specialWords[word]) {
@@ -24,39 +29,14 @@ function transformWord(word) {
     return transformedWord;
 }
 
-function transformDictionary(dictionary) {
-    return dictionary.map(entry => ({
-        ...entry,
-        word: transformWord(entry.word),
-        pronunciation: transformWord(entry.pronunciation),
-        meaning: transformWord(entry.meaning),
-        inflections: entry.inflections.map(transformWord),
-        related_words: entry.related_words.map(transformWord),
-        created_word: transformWord(entry.created_word)
-    }));
+function transformText(text) {
+    const words = text.split(/\s+/);
+    const transformedWords = words.map(transformWord);
+    return transformedWords.join(' ');
 }
 
-// 例の辞書データ
-const dictionaryData = [
-    {
-        "word": "独立",
-        "pronunciation": "どくりつ",
-        "meaning": "independence",
-        "inflections": ["独立の", "独立に", "独立を"],
-        "related_words": ["国"],
-        "created_word": "独立国"
-    },
-    // 他の単語データをここに追加
-];
-
-// 特別単語リスト
-const specialWords = {
-    "独立": "りぇとこに",
-    "国": "こに"
-};
-
-// 変換後の辞書データを取得
-const transformedDictionary = transformDictionary(dictionaryData);
-
-// 結果をコンソールに表示
-console.log(transformedDictionary);
+function transformAndDisplay() {
+    const inputText = document.getElementById('inputText').value;
+    const outputText = transformText(inputText);
+    document.getElementById('outputText').textContent = outputText;
+}
