@@ -12,19 +12,14 @@ const specialWords = {
     "楽天": "るぁくつぅえん",
     "モバイル": "すむぁふぅおゆぅずや",
     "糞": "ひぃん",
-　　 "京": "けい",
-　　 "何": "なにゃ",
+    "京": "けい",
+    "何": "なにゃ",
     "ください": "くでせーれ",
     "満たす": "でびゅる",
     "馬鹿": "うましか"
 };
 
 function transformWord(word) {
-    // 特別単語リストをチェック
-    if (specialWords[word]) {
-        return specialWords[word];
-    }
-
     const transformMap = {
         'あ': 'あ', 'い': 'ぅい', 'う': 'う', 'え': 'い', 'お': 'おぁ',
         'か': 'け', 'き': 'くぃ', 'く': 'こ', 'け': 'き', 'こ': 'か',
@@ -46,9 +41,18 @@ function transformWord(word) {
 }
 
 function transformText(text) {
-    const words = text.split(/\s+/);
-    const transformedWords = words.map(transformWord);
-    return transformedWords.join(' ');
+    // 特別単語を変換
+    for (let [key, value] of Object.entries(specialWords)) {
+        const regex = new RegExp(key, 'g');
+        text = text.replace(regex, value);
+    }
+
+    // 特別単語変換後の文字列をさらに変換
+    let transformedText = '';
+    for (let char of text) {
+        transformedText += transformWord(char);
+    }
+    return transformedText;
 }
 
 function transformAndDisplay() {
