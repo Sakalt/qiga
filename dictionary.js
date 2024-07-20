@@ -1,6 +1,6 @@
 const dictionary = [
     { word: "ホタル", pronunciation: "Hotaru", partOfSpeech: "名詞", meaning: "Hotaru" },
-    { word: "独立", pronunciation: "dokulitu", partOfSpeech: "名詞", meaning: "independence" },
+    { word: "独立", pronunciation: "dokuritsu", partOfSpeech: "名詞", meaning: "independence" },
     { word: "宣言", pronunciation: "senɡen", partOfSpeech: "名詞", meaning: "declaration" },
     { word: "人気", pronunciation: "ɳinki", partOfSpeech: "名詞", meaning: "popularity" },
     { word: "ゲーム", pronunciation: "ɡeɪm", partOfSpeech: "名詞", meaning: "game" },
