@@ -57,17 +57,18 @@ function transformWord(word) {
 
 function transformText(text) {
     // 特別単語を変換
+    let transformedText = text;
     for (let [key, value] of Object.entries(specialWords)) {
         const regex = new RegExp(key, 'g');
-        text = text.replace(regex, value);
+        transformedText = transformedText.replace(regex, value);
     }
 
     // 特別単語変換後の文字列をさらに変換
-    let transformedText = '';
-    for (let char of text) {
-        transformedText += transformWord(char);
+    let finalText = '';
+    for (let char of transformedText) {
+        finalText += transformWord(char);
     }
-    return transformedText;
+    return finalText;
 }
 
 function transformAndDisplay() {
