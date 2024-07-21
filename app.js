@@ -56,19 +56,26 @@ function transformWord(word) {
 }
 
 function transformText(text) {
-    // 特別単語を変換
-    let transformedText = text;
-    for (let [key, value] of Object.entries(specialWords)) {
-        const regex = new RegExp(key, 'g');
-        transformedText = transformedText.replace(regex, value);
+    let transformedText = '';
+    let i = 0;
+    while (i < text.length) {
+        let matched = false;
+        // 特別単語のチェック
+        for (let [key, value] of Object.entries(specialWords)) {
+            if (text.substr(i, key.length) === key) {
+                transformedText += value;
+                i += key.length;
+                matched = true;
+                break;
+            }
+        }
+        // 特別単語にマッチしなかった場合の処理
+        if (!matched) {
+            transformedText += transformWord(text[i]);
+            i++;
+        }
     }
-
-    // 特別単語変換後の文字列をさらに変換
-    let finalText = '';
-    for (let char of transformedText) {
-        finalText += transformWord(char);
-    }
-    return finalText;
+    return transformedText;
 }
 
 function transformAndDisplay() {
